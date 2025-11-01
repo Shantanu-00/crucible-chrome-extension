@@ -801,7 +801,7 @@ async getDashboardStats(view = 'ltp') {
     if (view === 'stp') {
         // --- Get STP Stats ---
         const lastSTP = await this.getLastSTP(); // This function already exists in your file
-        if (!lastSTP) {
+        if (!lastSTP|| !lastSTP.session_id) {
             console.warn("getDashboardStats(stp): No lastSTP found.");
             return { snapshotCount: 0, totalActiveTime: '0m', uniqueSearchesCount: 0, topDomainCount: 0 };
         }
@@ -3060,16 +3060,14 @@ getDemoProfileData() {
                
                 
             },
-            sessions_seen: 15,
-            ewma_focus: 0.75,
-            ewma_depth: 0.68,
+            sessions_seen: 0,
+            ewma_focus: 0.5,
+            ewma_depth: 0.5,
             intent_aggregate: {
-                "deep_research": 0.52,
-                "quick_lookup": 0.23,
-                "learning": 0.25
+                
             },
             last_updated: oneDayAgo,
-            confidence: 0.84
+            confidence: 0.4
         },
         stpHistory: [
             {
@@ -3105,15 +3103,13 @@ getDemoProfileData() {
             sessionId: "demo_current",
             timestamp: now,
             topics: {
-                "Technology": 0.89,
-                "Educational": 0.85,
-                "Politics": 0.72
+               
             },
-            focus_score: 0.81,
-            depth_score: 0.74,
+            focus_score: 0.5,
+            depth_score: 0.5,
             primary_intent: "deep_research",
             duration: 960000, // 16 minutes
-            pagesVisited: 6
+            pagesVisited: 1
         },
         profileSummary: {
             combinedSummary: "give generic summary.",
