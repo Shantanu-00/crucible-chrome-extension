@@ -1,0 +1,73 @@
+{
+  "manifest_version": 3,
+  "name": "Crucible",
+  "description": "Where your web refines itself into insight.",
+  "version": "1.0",
+
+  "icons": {
+    "16": "src/images/icon16.png",
+    "32": "src/images/icon32.png",
+    "48": "src/images/icon48.png",
+    "128": "src/images/icon128.png"
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+
+      "js": [
+        "src/utils/environmentCheck.js",
+
+        "src/tracking/behaviorMonitor.js",
+        "src/content/contentHub.js",
+        "src/tracking/searchTracker.js"
+
+      ],
+      "css": ["src/content/orb.css"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/lib/dexie.min.js",
+        "src/storage/databaseService.js",
+        "src/ai/*.js",
+        "src/content/*.js",
+        "src/tracking/*.js",
+        "src/content/orb.css",
+        "src/images/*.png",
+        "src/images/*.jpg"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "Crucible",
+    "default_icon": {
+      "16": "src/images/icon16.png",
+      "32": "src/images/icon32.png",
+      "48": "src/images/icon48.png"
+    }
+  }
+}

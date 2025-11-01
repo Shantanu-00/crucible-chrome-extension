@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crucible - Core</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="dark">
+  <div class="dashboard-wrapper">
+    <div class="overlay-animation">
+      <div class="grid-lines"></div>
+      <div class="node node-1"></div>
+      <div class="node node-2"></div>
+      <div class="node node-3"></div>
+    </div>
+
+    <div class="dashboard-container">
+      <header class="nexus-header">
+        <div class="header-core">
+          <div class="nexus-orb">
+            <img src="../images/icon48.png" alt="Crucible Logo" class="header-logo">
+          </div>
+          <div class="header-meta">
+            <h1 class="nexus-title">Crucible Core</h1>
+            <p class="nexus-subtitle">Insight Matrix</p>
+          </div>
+        </div>
+        <div class="header-controls">
+          <button id="themeToggle" class="theme-btn" data-tooltip="Toggle Theme">
+            <i class="fas fa-sun"></i> </button>
+          <button id="backToPopup" class="exit-btn">
+            <i class="fas fa-arrow-left"></i> Exit Matrix
+          </button>
+        </div>
+      </header>
+
+      <div class="time-vector">
+        <div class="vector-buttons">
+          <button class="view-toggle vector-btn active" data-view="ltp" data-tooltip="Core Profile: Your all-time browsing habits and interests.">
+            <i class="fas fa-brain"></i> Core Profile
+          </button>
+          <button class="view-toggle vector-btn" data-view="stp" data-tooltip="Session Profile: Data from your most recent browsing session.">
+            <i class="fas fa-clock"></i> Session Profile
+          </button>
+        </div>
+      </div>
+
+      <main class="matrix-main">
+        <section class="matrix-section">
+          <h2 class="section-header"><i class="fas fa-chart-network"></i> Insight Metrics (<span id="currentViewIndicator">Core</span>)</h2>
+          <div class="metrics-matrix">
+            
+            <div class="metric-card">
+              <div class="metric-node">
+                <div class="node-front">
+                  <div class="node-icon"><i class="fas fa-camera-retro"></i></div>
+                  <div class="node-value" id="totalSnapshots">0</div>
+                  <div class="node-label">Crucible Nodes</div>
+                </div>
+                <div class="node-back">
+                  <p>Crucible Nodes are snapshots of pages you specifically saved.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-node">
+                <div class="node-front">
+                  <div class="node-icon"><i class="fas fa-hourglass-half"></i></div>
+                  <div class="node-value" id="totalHours">0</div>
+                  <div class="node-label">Flux Duration</div>
+                </div>
+                <div class="node-back">
+                  <p>Flux Duration is your active browsing time in this view (Core or Session).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-node">
+                <div class="node-front">
+                  <div class="node-icon"><i class="fas fa-search"></i></div>
+                  <div class="node-value" id="totalSearches">0</div>
+                  <div class="node-label">Query Pulses</div>
+                </div>
+                <div class="node-back">
+                  <p>Query Pulses are searches you've made on Google.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-node">
+                <div class="node-front">
+                  <div class="node-icon"><i class="fas fa-sitemap"></i></div>
+                  <div class="node-value" id="totalNodes">0</div>
+                  <div class="node-label" id="nodesLabel">Nodes</div>
+                </div>
+                <div class="node-back">
+                  <p>Nodes are your top interest domains based on browsing activity.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="matrix-section">
+          <h2 class="section-header" id="domainLatticeHeader"><i class="fas fa-sitemap"></i> Topic Lattice</h2>
+
+          <div class="lattice-grid">
+            <div class="lattice-panel">
+              <h3 id="domainListTitle">Prime Topics</h3>
+              <div id="topDomainsList"> 
+                <div class="stream-placeholder">
+                  <i class="fas fa-database"></i>
+                  <p>Lattice scanning...</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="lattice-panel metrics-panel">
+              <h3 id="domainMetricsTitle">Insight Metrics</h3>
+              <div class="metric-row">
+                <span class="metric-key" id="domainMetric1Key">Topic Weight</span>
+                <span class="metric-val" id="avgEngagement">0%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-key" id="domainMetric2Key">Focus Style</span>
+                <span class="metric-val" id="totalDomainTime">-</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-key" id="domainMetric3Key">Content Pref</span>
+                <span class="metric-val" id="contentFocus">-</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="nav-core scroll-target">
+          <div class="core-nav">
+            <button class="nav-node active" data-tab="snapshots"><i class="fas fa-camera"></i> Crucible Nodes</button>
+            <button class="nav-node" data-tab="searches"><i class="fas fa-search"></i> Query Log</button>
+            <button class="nav-node" data-tab="facts"><i class="fas fa-lightbulb"></i> Insight Core</button>
+            <button class="nav-node" data-tab="profile"><i class="fas fa-user-astronaut"></i> Profile Matrix</button>
+          </div>
+        </section>
+
+        <div class="lattice-content">
+          <div id="snapshots-tab" class="tab-lattice active">
+            <div class="lattice-header">
+              <h3><i class="fas fa-layer-group"></i> Crucible Archive</h3>
+              <div class="filter-matrix">
+                <input type="text" id="snapshotSearch" placeholder="Scan archive..." class="scan-input">
+              </div>
+            </div>
+            <div id="snapshotsList" class="archive-grid"></div>
+          </div>
+
+          <div id="searches-tab" class="tab-lattice">
+            <div class="lattice-header">
+              <h3><i class="fas fa-history"></i> Query Chronology</h3>
+            </div>
+            <div id="searchesList" class="log-stream"></div>
+          </div>
+
+          <div id="facts-tab" class="tab-lattice">
+            <div class="lattice-header">
+              <h3><i class="fas fa-neural"></i> Neural Insights</h3>
+              <button id="generateNewFacts" class="evolve-btn"><i class="fas fa-sync-alt"></i> Evolve Core</button>
+            </div>
+            <div id="factsList" class="insight-grid">
+              <div class="grid-placeholder">
+                <i class="fas fa-brain"></i>
+                <p>Feature Upcoming</p>
+                <small>Insights will be generated here.</small>
+              </div>
+            </div>
+          </div>
+
+          <div id="profile-tab" class="tab-lattice">
+            <div class="lattice-header">
+              <h3><i class="fas fa-user-astronaut"></i> Profile Matrix (<span id="profileViewIndicator">Core</span>)</h3>
+            </div>
+
+            <div class="profile-summary-card">
+              <p id="profileSummaryText">Loading profile summary...</p>
+            </div>
+
+            <div class="profile-matrix">
+              <div class="matrix-panel">
+                <h3><i class="fas fa-user-circle"></i> Core Profile</h3>
+                <div class="profile-metrics">
+                  <div class="metric-row">
+                    <span class="key">Nexus Total</span>
+                    <span class="val" id="profileTotalSnapshots">0</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="key">Flux Total</span>
+                    <span class="val" id="profileTotalTime">0h</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="key" id="profileActiveDaysLabel">Sessions Analyzed</span>
+                    <span class="val" id="profileActiveDays">0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="matrix-panel">
+                <h3><i class="fas fa-star"></i> Nebula Vectors (Top Interests)</h3>
+                <div id="interestsContainer" class="nebula-stream">
+                  <div class="stream-placeholder">
+                    <i class="fas fa-constellation"></i>
+                    <p>Vectors mapping</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="matrix-panel">
+                <h3><i class="fas fa-chart-line"></i> Behavior Arc</h3>
+                <div class="behavior-metrics">
+                  <div class="metric-row">
+                    <span class="key">Focus Style</span>
+                    <span class="val" id="profileBehavior">Medium</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="key">Content Preference</span>
+                    <span class="val" id="profileContentStyle">Balanced</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="customTooltip" class="custom-tooltip" style="display: none;"></div>
+
+  <div id="snapshotModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <button id="modalClose" class="modal-close-btn"><i class="fas fa-times"></i></button>
+      <a id="modalUrl" href="#" target="_blank" rel="noopener noreferrer"></a>
+      <h2 id="modalTitle"></h2>
+      <p id="modalSummary"></p>
+      <span id="modalDate" class="modal-meta-date"></span>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Crucible Experience</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <div class="popup-wrapper">
+    
+    <header class="header">
+      <div class="header-content">
+        <img src="../images/icon32.png" class="logo-icon" style="width: 24px; height: 24px; border-radius: 4px; margin-right: 8px;">
+        <h1 class="title">Crucible Experience</h1>
+      </div>
+      <button id="toggleOrb" class="orb-btn" title="Toggle Page Orb">
+        <i class="fas fa-circle-notch"></i>
+      </button>
+    </header>
+
+    <section class="core-metrics">
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i class="fas fa-link"></i>
+        </div>
+        <div class="metric-value" id="crucibleNodes">0</div>
+        <div class="metric-label">Crucible Nodes</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i class="fas fa-wave-square"></i>
+        </div>
+        <div class="metric-value" id="queryPulse">0</div>
+        <div class="metric-label">Query Pulse</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i class="fas fa-exchange-alt"></i>
+        </div>
+        <div class="metric-value" id="totalFlux">0</div>
+        <div class="metric-label">Total Flux</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-icon">
+          <i class="fas fa-database"></i>
+        </div>
+        <div class="metric-value" id="nodes">0</div>
+        <div class="metric-label">Nodes</div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="toggle-row">
+        <label for="toggleProfileForge">Profile Forge</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleProfileForge">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="toggle-row">
+        <label for="toggleAI">AI Enabled</label>
+        <label class="switch">
+          <input type="checkbox" id="toggleAI">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button id="openDashboard" class="dashboard-btn-secondary">
+        Open Dashboard
+      </button>
+    </section>
+
+    <footer class="footer">
+      <span id="sessionTime">Session: 0m</span>
+      <span id="status">Status: Active</span>
+    </footer>
+  </div>
+  
+  <script src="../lib/dexie.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
